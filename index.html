@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marisquería Online</title>
+  <link rel=stylesheet href=styles.css>
+</head>
+<body>
+  <nav>
+    <a href="#" class="active" data-section="inicio">Inicio</a>
+    <a href="#" data-section="platillos">Platillos</a>
+    <a href="#" data-section="cocteles">Cócteles</a>
+    <a href="#" data-section="sopas">Sopas y caldos</a>
+    <a href="#" data-section="contacto">Contacto</a>
+  </nav>
+  <main>
+    <section id="inicio" class="active">
+      <h1>Bienvenido a Marisqueria D´Fran</h1>
+      <p>Las delicias del mar a su paladar. </p>
+      <h1>Historia del Restaurante</h1>
+<p>"Funde este restaurante con la intención de poder mantener a mi familia, antes de tomar esta decisión tuve diferentes trabajos
+   en donde no ganaba lo suficiente para poder mantener correctamente a mi familia, pasamos por situciones difíciles debido a mi 
+   empleo así que tome la decisión de ahorrar y abrir mi local, al principio era difícil ya que al ser nuevo en esa área presente 
+   dificultades y cometí varios errores que me salieron caros, pero no me rendí teniendo la esperanza de que todo iba a mejorar, y 
+   sucedío poco a poco la gente empezo a conocer mi negocio y empezaron a recomendar mi lugar, me siento muy feliz por poder lograr esto".</p>
+      <div class="carousel-container">
+        <button class="carousel-btn left" aria-label="Anterior">&#10094;</button>
+        <div class="carousel-slide" id="carousel-slide">
+          <img src="images.jpg" alt="Imagen 1">
+          <img src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=600&q=80" alt="Mariscos frescos 2" />
+          <img src="https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=600&q=80" alt="Mariscos frescos 3" />
+          <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Mariscos frescos 4" />
+          
+        </div>
+        <button class="carousel-btn right" aria-label="Siguiente">&#10095;</button>
+      </div>
+    </section>
+    <section id="platillos">
+      <h2>Platillos</h2>
+      <div class="menu-list" id="platillos-list">
+        <!-- Platillos items inserted by JS -->
+      </div>
+    </section>
+    <section id="cocteles">
+      <h2>Cócteles</h2>
+      <div class="menu-list" id="cocteles-list">
+        <!-- Cócteles items inserted by JS -->
+      </div>
+    </section>
+    <section id="sopas">
+      <h2>Sopas y caldos</h2>
+      <div class="menu-list" id="sopas-list">
+        <!-- Sopas y caldos inserted by JS -->
+      </div>
+    </section>
+    <section id="contacto">
+      <h2>Contacto</h2>
+      <form action="ran.php " method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required />
+        <label for="email">Correo electrónico:</label>
+        <input type="email" id="email" name="email" placeholder="tu@correo.com" required />
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" placeholder="Escribe tu mensaje aquí..." required></textarea>
+        <button type="submit" class="order-btn">Enviar mensaje</button>
+      </form>
+    </section>
+    <section id="order">
+      <h2>Tu Pedido</h2>
+      <div class="order-summary" id="order-summary">No has agregado nada al pedido.</div>
+      <button id="place-order" class="order-btn" disabled>Realizar Pedido</button>
+    </form>
+    </section>
+  </main>
+  <script>
+    // Data for menu items
+    const menuData = {
+      platillos: [
+        { id: 'p1', name: 'Camarones al Ajillo', description: 'Camarones salteados con ajo y chile de arbol, acompañado de guarnición.', price: 160 },
+        { id: 'p2', name: 'Camarones al Ajo', description: 'Camarones salteados con ajo, acompañados de guarnición.', price: 160 },
+        { id: 'p3', name: 'Camarones Empanizados', description: 'Camarones empanizados, acompañados de guarnición.', price: 160 },
+        { id: 'p4', name: 'Camarones a la Diabla', description: 'Camarones bañados en salsa diabla, acompañados de guanición', price: 160 },
+        { id: 'p5', name: 'Camarones al Aguachile', description: 'Camarones sazonados con sal y limón, acompañados de guarnición', price: 180 },
+        { id: 'p6', name: 'Camarones a la Mantequilla', description: 'Camarones salteados con mantequilla, acompañados de guanición.', price: 160 },
+        { id: 'p7', name: 'Camarones a la Plancha', description: 'Camarones sazonados con sal de ajo y pimienta, acompañados de guanición.', price: 160 },
+        { id: 'p8', name: 'Camarones para Pelar', description: 'Camarones con cascara, acompañados con rodajas de jitoamte, pepino, cebolla, bañados con limón, sal, salsa tipo valentina y tajín.', price: 160 },
+        { id: 'p9', name: 'Camarones Encintados', description: 'Camarones rellenos de queso manchego enrollados en tocino, acompañados de guarnición y salsa especial de la casa', price: 230 },
+        { id: 'p10', name: 'Camarones Rellenos', description: 'Camarones rellenos de queso filadelfia,jamon y empanizados, acompañados de guarnición y salsa especial de la casa', price: 230 },
+        { id: 'p11', name: 'Camarones al Coco', description: 'Camarones empaniados en coco rallado, acompañados de guarnición y salsa especial de la casa', price: 180 },
+        { id: 'p12', name: 'Camarones a la BBQ', description: 'Camarones bañados en salsa tipo BBQ, acompañados de guarnición', price: 160 },
+        { id: 'p13', name: 'Camarones Gratinados', description: 'Camarones sazonados, gratinados con queso asadero y chile morron, acompañados de guarnición', price: 160 },
+        { id: 'p14', name: 'Camarones al Chipotle', description: 'Camarones bañados en salsa de chipotle con crema, acompañados de guarnición', price: 180 }
+      ],
+      cocteles: [
+        { id: 'c1', name: 'Cóctel de Camarón', description: 'Camarones frescos, tomate, cebolla y cilantro.', price: 90 },
+        { id: 'c2', name: 'Cóctel de Pulpo', description: 'Pulpo con salsa especial y limón.', price: 95 },
+        { id: 'c3', name: 'Cóctel Mixto', description: 'Mezcla de mariscos con salsa coctelera.', price: 100 }
+      ],
+      sopas: [
+        { id: 's1', name: 'Sopa de Mariscos', description: 'Caldo con mariscos variados y verduras.', price: 90 },
+        { id: 's2', name: 'Caldo de Camarón', description: 'Caldo tradicional de camarón con chile.', price: 85 },
+        { id: 's3', name: 'Sopa de Pescado', description: 'Caldo de pescado fresco con verduras.', price: 80 }
+      ],
+    };
+
+  
+
+  // Llamar a la función al cargar la página
+  window.onload = loadMenu;
+
+    // Function to create menu items in a section
+    function renderMenuItems(sectionId, items) {
+      const container = document.getElementById(sectionId + '-list');
+      container.innerHTML = '';
+      items.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'menu-item';
+        div.innerHTML = `
+          <h4>${item.name}</h4>
+          <p class="description">${item.description}</p>
+          <div class="price-qty">
+            <div class="price">$${item.price.toFixed(2)}</div>
+            <div>
+              <label for="qty-${item.id}">Cantidad:</label>
+              <input type="number" id="qty-${item.id}" min="0" value="0" data-id="${item.id}" data-name="${item.name}" data-price="${item.price}" />
+            </div>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    // Initialize all menu items
+    ['platillos', 'cocteles', 'sopas'].forEach(section => {
+      renderMenuItems(section, menuData[section]);
+    });
+
+    // Handle menu navigation clicks
+    const navLinks = document.querySelectorAll('nav a');
+    const sections = document.querySelectorAll('main > section:not(#order)');
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        const target = link.getAttribute('data-section');
+        sections.forEach(sec => {
+          sec.classList.toggle('active', sec.id === target);
+        });
+        // Hide order section on navigation
+        orderSection.style.display = 'none';
+      });
+    });
+
+    // Order summary and placing order
+    const orderSummary = document.getElementById('order-summary');
+    const placeOrderBtn = document.getElementById('place-order');
+    const orderSection = document.getElementById('order');
+
+    function updateOrderSummary() {
+      let itemsOrdered = [];
+      let total = 0;
+      document.querySelectorAll('input[type="number"]').forEach(input => {
+        const qty = parseInt(input.value);
+        if (qty > 0) {
+          const id = input.dataset.id;
+          const name = input.dataset.name;
+          const price = parseFloat(input.dataset.price);
+          const itemTotal = price * qty;
+          total += itemTotal;
+          itemsOrdered.push(`${qty} x ${name} - $${itemTotal.toFixed(2)}`);
+        }
+      });
+      if(itemsOrdered.length === 0){
+        orderSummary.textContent = 'No has agregado nada al pedido.';
+        placeOrderBtn.disabled = true;
+      } else {
+        orderSummary.textContent = itemsOrdered.join('\n') + `\n\nTotal: $${total.toFixed(2)}`;
+        placeOrderBtn.disabled = false;
+      }
+    }
+
+    // Listen to quantity changes on inputs
+    document.body.addEventListener('input', e => {
+      if(e.target.matches('input[type="number"]')) {
+        if (e.target.value < 0) e.target.value = 0;
+        updateOrderSummary();
+      }
+    });
+
+    // Place order button click
+    placeOrderBtn.addEventListener('click', () => {
+      alert('Gracias por tu pedido. ¡Nos pondremos en contacto contigo pronto!');
+      // Reset all quantities and order summary
+      document.querySelectorAll('input[type="number"]').forEach(input => input.value = 0);
+      updateOrderSummary();
+      // Optionally navigate to Inicio or clear active menu
+      navLinks.forEach(l => l.classList.remove('active'));
+      navLinks[0].classList.add('active');
+      sections.forEach(sec => sec.classList.toggle('active', sec.id === 'inicio'));
+      orderSection.style.display = 'none';
+    });
+
+    // Show order tab on demand
+    // Add a "Tu Pedido" button in nav to open order summary
+    const orderNavItem = document.createElement('a');
+    orderNavItem.href = '#';
+    orderNavItem.textContent = 'Tu Pedido';
+    orderNavItem.style.marginTop = 'auto';
+    orderNavItem.style.padding = '15px 20px';
+    orderNavItem.style.fontWeight = '700';
+    orderNavItem.style.color = '#a7ffeb';
+    orderNavItem.style.cursor = 'pointer';
+    orderNavItem.style.borderLeft = '6px solid transparent';
+    orderNavItem.addEventListener('click', e => {
+      e.preventDefault();
+      navLinks.forEach(l => l.classList.remove('active'));
+      orderNavItem.classList.add('active');
+      sections.forEach(sec => sec.classList.remove('active'));
+      orderSection.style.display = 'block';
+      orderSummary.scrollIntoView({behavior: 'smooth'});
+      updateOrderSummary();
+    });
+    document.querySelector('nav').appendChild(orderNavItem);
+    orderSection.style.display = 'none';
+
+    // Carousel functionality for Inicio
+    const carouselSlide = document.getElementById('carousel-slide');
+    const carouselImages = carouselSlide.querySelectorAll('img');
+    const prevBtn = document.querySelector('.carousel-btn.left');
+    const nextBtn = document.querySelector('.carousel-btn.right');
+    let counter = 0;
+    const totalImages = carouselImages.length;
+
+    function showSlide(index) {
+      if (index < 0) {
+        counter = totalImages -1;
+      } else if (index >= totalImages) {
+        counter = 0;
+      } else {
+        counter = index;
+      }
+      carouselSlide.style.transform = `translateX(${-counter * 100}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      showSlide(counter -1);
+    });
+    nextBtn.addEventListener('click', () => {
+      showSlide(counter +1);
+    });
+
+    // Auto slide every 5 seconds
+    setInterval(() => {
+      showSlide(counter +1);
+    }, 5000);
+
+  // Función para cargar el menú desde el PHP
+  async function loadMenu() {
+    try {
+      const response = await fetch('tu_script.php'); // Cambia 'tu_script.php' por el nombre de tu archivo PHP
+      const menuItems = await response.json();
+      // Renderizar los items del menú
+      renderMenuItems('platillos', menuItems.platillos);
+      renderMenuItems('cocteles', menuItems.cocteles);
+      renderMenuItems('sopas', menuItems.sopas);
+    } catch (error) {
+      console.error('Error al cargar el menú:', error);
+    }
+  }
+
+  // Llamar a la función al cargar la página
+  window.onload = loadMenu;
+  </script>
+</body>
+</html>
+
+
